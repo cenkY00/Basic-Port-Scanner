@@ -11,7 +11,7 @@ func main() {
 	target := "scanme.nmap.org"
 	var wg sync.WaitGroup
 
-	for port := 1; port <= 24; port++ {
+	for port := 1; port <= 1024; port++ {
 		wg.Add(1)
 		go func(port int) {
 			defer wg.Done()
@@ -23,7 +23,7 @@ func main() {
 				return
 			}
 
-			_ = conn.Close()
+			defer conn.Close()
 			fmt.Printf("Port %d is open\n", port)
 		}(port)
 	}
